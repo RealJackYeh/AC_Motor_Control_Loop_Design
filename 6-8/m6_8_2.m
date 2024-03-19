@@ -1,0 +1,17 @@
+A = [-1, -2; 1, 0];
+B = [2; 0];
+C = [0, 1];
+D = 0;
+p1 = [-6 -9 -60];
+A_bar = [A zeros(2,1); -C 0];
+B_bar = [B; 0];
+G_new = place(A_bar,B_bar, p1);
+A_new = A_bar - B_bar * G_new;
+B_new = [zeros(2,1); 1];
+C_new = [C 0];
+D_new = D;
+new_sys = ss(A_new, B_new, C_new, D_new);
+new_poles = pole(new_sys);
+step(new_sys);
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2); grid on;

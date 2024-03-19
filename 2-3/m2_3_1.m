@@ -1,0 +1,16 @@
+kpw=1; kiw=10;J=0.00016;
+tf_pi=tf([kpw kiw],[1 0]);
+% tf_plant=tf([1],[J 0]);
+% Go_w=tf_pi*tf_plant;
+h=bodeoptions;
+h.PhaseMatching='on';
+h.Title.FontSize = 14;
+h.XLabel.FontSize = 14;
+h.YLabel.FontSize = 14;
+h.TickLabel.FontSize = 14;
+% bodeplot(Go_w,'-b',{1,100000},h);
+bodeplot(tf_pi,'-b',{1,100000},h);
+legend('PI Bode');
+% legend('Go_w Bode');
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2);

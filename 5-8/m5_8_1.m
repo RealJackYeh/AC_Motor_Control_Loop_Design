@@ -1,0 +1,13 @@
+wc=2*pi*5;
+tf_lpf = tf(wc, [1 wc]);
+h=bodeoptions;
+h.PhaseMatching='on';
+h.Title.FontSize = 14;
+h.XLabel.FontSize = 14;
+h.YLabel.FontSize = 14;
+h.TickLabel.FontSize = 14;
+bodeplot(tf_lpf,'-b',{0,1000},h);
+legend('first_order_LPF, wc=31.42(rad/s)');
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2);
+grid on;

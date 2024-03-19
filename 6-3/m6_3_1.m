@@ -1,0 +1,13 @@
+s=tf('s');
+T=0.001;
+tf_ZOH=(1-exp(-T*s))/(T*s);
+h=bodeoptions;
+h.PhaseMatching='on';
+h.Title.FontSize = 14;
+h.XLabel.FontSize = 14;
+h.YLabel.FontSize = 14;
+h.TickLabel.FontSize = 14;
+bodeplot(tf_ZOH,'-b',{1,2*pi*1000/2},h);
+legend('tf-ZOH');
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2); grid on;

@@ -1,0 +1,14 @@
+wsc=200; J=0.00016;
+Kp_w=J*wsc; Ki_w=Kp_w*wsc/5;
+tf_disturbance = tf([1 0],[J Kp_w Ki_w]);
+h=bodeoptions;
+h.PhaseMatching='on';
+h.Title.FontSize = 14;
+h.XLabel.FontSize = 14;
+h.YLabel.FontSize = 14;
+h.TickLabel.FontSize = 14;
+bodeplot(tf_disturbance,'-b',{1,10000},h);
+legend('TF-disturbance');
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2);
+grid on;

@@ -1,0 +1,23 @@
+t = linspace(0, 0.02, 100);
+va = 220*1.414*sin(2*pi*50*t);
+vb = 220*1.414*sin(2*pi*50*t-2*pi/3);
+vc = 220*1.414*sin(2*pi*50*t-4*pi/3);
+v_alpha = 2/3*(1*va - 0.5*vb - 0.5*vc);
+v_beta = 2/3*(sqrt(3)/2*vb - sqrt(3)/2*vc);
+v_zero = 2/3*(0.5*va + 0.5*vb + 0.5*vc);
+va1 = v_alpha + v_zero;
+vb1 = -0.5*v_alpha + sqrt(3)/2*v_beta + v_zero;
+vc1 = -0.5*v_alpha - sqrt(3)/2*v_beta + v_zero;
+subplot(3,1,1);
+plot(t, va, t, vb, t, vc, 'LineWidth', 2);
+legend('va', 'vb', 'vc');
+title('Original abc');
+subplot(3,1,2);
+plot(t, v_alpha, t, v_beta, 'LineWidth', 2);
+legend('v_\alpha', 'v_\beta');
+title('\alpha\beta');
+subplot(3,1,3);
+plot(t, va1, t, vb1, t, vc1, 'LineWidth', 2);
+legend('va', 'vb', 'vc');
+title('abc-\alpha\beta-abc');
+

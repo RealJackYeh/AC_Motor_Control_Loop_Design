@@ -1,0 +1,28 @@
+J=0.00016; 
+s = tf('s');
+Kp_w=0.3905; Ki_w=190.6307; 
+tf_cmdFilter = tf(Ki_w/Kp_w, [1 Ki_w/Kp_w]);
+tf_pi = tf([Kp_w Ki_w],[1 0]);
+tf_pc = tf([5000], [1 5000]);
+tf_plant = tf([1], [J 0]);
+Gw_open = tf_pi*tf_pc*tf_plant;
+Gw_close = tf_cmdFilter*Gw_open/(1+Gw_open);
+Kp_p = 150;
+tf_plant_p = tf(1,[1 0]);
+Gp_open = Kp_p*Gw_close*tf_plant_p;
+Gp_close = Gp_open/(1+Gp_open);
+h=bodeoptions;
+h.PhaseMatching='on';
+h.Title.FontSize = 14;
+h.XLabel.FontSize = 14;
+h.YLabel.FontSize = 14;
+h.TickLabel.FontSize = 14;
+bodeplot(Gw_close,'-b',Gp_close,'-.b',{1,10000},h);
+legend('Gw-close', 'Gp-close');
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2);
+grid on;
+
+% Gf = s*J;
+% kf = 0.8;
+% Gw_ff = (kf*Gf+tf_pi)*tf_pc*tf_plant/(1+tf_pi*tf_pc*tf_plant);
